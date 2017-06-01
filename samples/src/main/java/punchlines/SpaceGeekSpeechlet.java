@@ -25,6 +25,10 @@ import com.amazon.speech.ui.PlainTextOutputSpeech;
 import com.amazon.speech.ui.Reprompt;
 import com.amazon.speech.ui.SimpleCard;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * This simple sample has no external dependencies or session management, and shows the most basic
  * example of how to handle Alexa Skill requests.
@@ -56,6 +60,9 @@ public class SpaceGeekSpeechlet implements Speechlet {
             "The Moon is moving approximately 3.8 cm away from our planet every year."
     };
 
+
+
+
     @Override
     public void onSessionStarted(final SessionStartedRequest request, final Session session)
             throws SpeechletException {
@@ -83,6 +90,9 @@ public class SpaceGeekSpeechlet implements Speechlet {
 
         if ("GetNewFactIntent".equals(intentName)) {
             return getNewFactResponse();
+
+        } else if ("RandomPunchlineIntent".equals(intentName)) {
+            return getRandomPunchlineIntent();
 
         } else if ("AMAZON.HelpIntent".equals(intentName)) {
             return getHelpResponse();
@@ -131,6 +141,34 @@ public class SpaceGeekSpeechlet implements Speechlet {
         speech.setText(speechText);
 
         return SpeechletResponse.newTellResponse(speech, card);
+    }
+
+    private SpeechletResponse getRandomPunchlineIntent() {
+
+       ArrayList<String> punchlinesFarid = new ArrayList<>();
+       punchlinesFarid.add("Der einzige Ring, den ich einer Frau gebe, traegt sie am Auge.");
+       punchlinesFarid.add("Und ich knalle im Bordell deine Mama, sie kriegt ne Ladung hinten rein, wie LKW-Fahrer");
+       punchlinesFarid.add("Wo du kurz vor deiner Geburt warst, ist jetzt mein Schwanz");
+       punchlinesFarid.add("Ich bin ein Romantiker, wie Buchverkauefer");
+       punchlinesFarid.add("Wenn ein Türsteher sagt ich passe nicht rein, dann sag ich du hast Recht, denn ich trainier auf Masse zur Zeit.");
+       punchlinesFarid.add("Rapper reden von Gangstern, die sie mit Waffen beschuetzen, sie sind keine Taucher, doch haben nur Flaschen im Ruecken");
+       punchlinesFarid.add("Die Frauen heute wollen Jungfrau bleiben. Zwei Optionen, Arsch oder Mund auf, Kleines.");
+       punchlinesFarid.add("Deine Mutter ist wie ne Shisha, ohne Kohle geht nix.");
+
+       int random = (int) Math.random() * punchlinesFarid.size();
+
+       String punchline = punchlinesFarid.get(random);
+
+       PlainTextOutputSpeech speech = new PlainTextOutputSpeech();
+       speech.setText(punchline);
+
+        // Create the Simple card content.
+        SimpleCard card = new SimpleCard();
+        card.setTitle("Punchline");
+        card.setContent(punchline);
+
+       return SpeechletResponse.newTellResponse(speech, card);
+
     }
 
     /**
