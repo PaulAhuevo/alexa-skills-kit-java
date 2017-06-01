@@ -9,6 +9,7 @@
  */
 package punchlines;
 
+import com.amazon.speech.slu.Slot;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -76,7 +77,7 @@ public class SpaceGeekSpeechlet implements Speechlet {
             throws SpeechletException {
         log.info("onLaunch requestId={}, sessionId={}", request.getRequestId(),
                 session.getSessionId());
-        return getNewFactResponse();
+        return Punchlines.getRandomPunchlineIntent();
     }
 
     @Override
@@ -89,10 +90,13 @@ public class SpaceGeekSpeechlet implements Speechlet {
         String intentName = (intent != null) ? intent.getName() : null;
 
         if ("GetNewFactIntent".equals(intentName)) {
-            return getNewFactResponse();
+            return Punchlines.getRandomPunchlineIntent();
 
         } else if ("RandomPunchlineIntent".equals(intentName)) {
-            return getRandomPunchlineIntent();
+            return Punchlines.getRandomPunchlineIntent();
+
+        } else if ("RapperPunchlineIntent".equals(intentName)) {
+            return Punchlines.getRapperPunchlineIntent(intent);
 
         } else if ("AMAZON.HelpIntent".equals(intentName)) {
             return getHelpResponse();
@@ -143,33 +147,7 @@ public class SpaceGeekSpeechlet implements Speechlet {
         return SpeechletResponse.newTellResponse(speech, card);
     }
 
-    private SpeechletResponse getRandomPunchlineIntent() {
 
-       ArrayList<String> punchlinesFarid = new ArrayList<>();
-       punchlinesFarid.add("Der einzige Ring, den ich einer Frau gebe, traegt sie am Auge.");
-       punchlinesFarid.add("Und ich knalle im Bordell deine Mama, sie kriegt ne Ladung hinten rein, wie LKW-Fahrer");
-       punchlinesFarid.add("Wo du kurz vor deiner Geburt warst, ist jetzt mein Schwanz");
-       punchlinesFarid.add("Ich bin ein Romantiker, wie Buchverkauefer");
-       punchlinesFarid.add("Wenn ein Türsteher sagt ich passe nicht rein, dann sag ich du hast Recht, denn ich trainier auf Masse zur Zeit.");
-       punchlinesFarid.add("Rapper reden von Gangstern, die sie mit Waffen beschuetzen, sie sind keine Taucher, doch haben nur Flaschen im Ruecken");
-       punchlinesFarid.add("Die Frauen heute wollen Jungfrau bleiben. Zwei Optionen, Arsch oder Mund auf, Kleines.");
-       punchlinesFarid.add("Deine Mutter ist wie ne Shisha, ohne Kohle geht nix.");
-
-       int random = (int) Math.random() * punchlinesFarid.size();
-
-       String punchline = punchlinesFarid.get(random);
-
-       PlainTextOutputSpeech speech = new PlainTextOutputSpeech();
-       speech.setText(punchline);
-
-        // Create the Simple card content.
-        SimpleCard card = new SimpleCard();
-        card.setTitle("Punchline");
-        card.setContent(punchline);
-
-       return SpeechletResponse.newTellResponse(speech, card);
-
-    }
 
     /**
      * Returns a response for the help intent.
