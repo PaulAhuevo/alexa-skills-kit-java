@@ -7,7 +7,7 @@
 
     or in the "license" file accompanying this file. This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
  */
-import helloworld.HelloWorldSpeechlet;
+import punchlines.SpaceGeekSpeechlet;
 
 import org.apache.log4j.BasicConfigurator;
 import org.eclipse.jetty.server.Connector;
@@ -21,12 +21,12 @@ import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 import org.eclipse.jetty.util.ssl.SslContextFactory;
 
-import main.java.session.SessionSpeechlet;
+import session.SessionSpeechlet;
 
 import com.amazon.speech.Sdk;
 import com.amazon.speech.speechlet.Speechlet;
 import com.amazon.speech.speechlet.servlet.SpeechletServlet;
-import main.java.punchlines.SpaceGeekSpeechlet;
+import punchlines.SpaceGeekSpeechlet;
 
 /**
  * Shared launcher for executing all sample skills within a single servlet container.
