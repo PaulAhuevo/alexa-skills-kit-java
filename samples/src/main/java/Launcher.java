@@ -21,11 +21,12 @@ import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 import org.eclipse.jetty.util.ssl.SslContextFactory;
 
-import session.SessionSpeechlet;
+import main.java.session.SessionSpeechlet;
 
 import com.amazon.speech.Sdk;
 import com.amazon.speech.speechlet.Speechlet;
 import com.amazon.speech.speechlet.servlet.SpeechletServlet;
+import main.java.punchlines.SpaceGeekSpeechlet;
 
 /**
  * Shared launcher for executing all sample skills within a single servlet container.
@@ -84,7 +85,7 @@ public final class Launcher {
         ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
         context.setContextPath("/");
         server.setHandler(context);
-        context.addServlet(new ServletHolder(createServlet(new HelloWorldSpeechlet())), "/hello");
+        context.addServlet(new ServletHolder(createServlet(new SpaceGeekSpeechlet())), "/punchline");
         context.addServlet(new ServletHolder(createServlet(new SessionSpeechlet())), "/session");
         server.start();
         server.join();
