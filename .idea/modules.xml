@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/alexa-skills-kit.iml" filepath="$PROJECT_DIR$/alexa-skills-kit.iml" />
+      <module fileurl="file://$PROJECT_DIR$/samples/alexa-skills-kit-samples.iml" filepath="$PROJECT_DIR$/samples/alexa-skills-kit-samples.iml" />
     </modules>
   </component>
 </project>
